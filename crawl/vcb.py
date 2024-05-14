@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+from datetime import timedelta, date
+from time import sleep
 
 def get_exchange_rate_by_day(date):
     url = f"https://portal.vietcombank.com.vn/UserControls/TVPortal.TyGia/pListTyGia.aspx?txttungay={date}"
@@ -31,12 +33,27 @@ def get_exchange_rate_by_day(date):
         print("Failed to fetch exchange rate data")
         return None
 
+def daterange(start_date, end_date):
+    for n in range(int ((end_date - start_date).days)):
+        yield start_date + timedelta(n)
+
+def crawl_data(start_date, end_date):
+    crawl_list = []
+    for single_date in daterange(start_date, end_date):
+        print(f"getting data for date {single_date}")
+        df_crawl = get_exchange_rate_by_day(single_date)
+        crawl_list.append(df_crawl)
+        sleep(1)
+    df = pd.concat(crawl_list)
+    return df
+
 def main():
-    # date = input("Enter date (dd/mm/yyyy): ")
-    date = '07/05/2024'
-    exchange_rates = get_exchange_rate_by_day(date)
-    if exchange_rates is not None:
-        exchange_rates.to_csv('crawl/data/vcb_rates.csv', index=False, header=True)
+    start_date = date(2023, 1, 1)
+    end_date = date(2024, 1, 1)
+
+    df_vnd = crawl_data(start_date, end_date)
+    if df_vnd is not None:
+        df_vnd.to_csv('data/vcb/vcb_rates_2023.csv', index=False, header=True)
     else:
         print("Exchange rates not found for the given date")
 

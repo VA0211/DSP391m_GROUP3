@@ -3,7 +3,8 @@ pandas
 datetime
 lxml
 urllib3
-decimal
 matplotlib
 seaborn 
 ipykernel
+beautifulsoup4
+tensorflow
