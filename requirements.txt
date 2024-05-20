@@ -8,3 +8,4 @@ seaborn
 ipykernel
 beautifulsoup4
 tensorflow
+selenium
