@@ -7,6 +7,7 @@ pip install -r requirements.txt
 ```
 
 **Selenium**
+- Used to crawl data from 1/1/2018 to 27/1/2020
 - Chrome version: 125.0.6422.61 (64bit) - 20/5/2024
 - [Chromedriver](https://storage.googleapis.com/chrome-for-testing-public/125.0.6422.60/win64/chromedriver-win64.zip)
 
