@@ -72,12 +72,12 @@ def crawl_data(start_date, end_date):
         return None
 
 def main():
-    start_date = date(2019, 1, 1)
-    end_date = date(2019, 2, 1)
+    start_date = date(2020, 1, 27)
+    end_date = date(2020, 1, 28)
 
     df_vnd = crawl_data(start_date, end_date)
     if df_vnd is not None:
-        df_vnd.to_csv('../crawl/data/vcb/2019/vcb_rates_2019_1.csv', index=False, header=True)
+        df_vnd.to_csv('../crawl/data/vcb/vcb_old_fix.csv', index=False, header=True)
     else:
         print("Exchange rates not found for the given date range")
 
