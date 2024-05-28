@@ -13,5 +13,5 @@ pip install -r requirements.txt
 
 **Error**
 1. Data crawling:
-- 22/12/2019 - not having data on vietcombank website
+- 22/12/2019 - not having data on vietcombank website - Drop date 22/12
 - Some old date (<=2020) have the wrong value: 11/10/2019, 29/11/2018, 5/7/2018, 24-25/4/2018 (They all have the value of 25.459k on Sell column) - Done fixing
