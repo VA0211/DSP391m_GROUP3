@@ -5,6 +5,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+import os
 
 def get_exchange_rate_by_day(date_str):
     # Initialize Chrome WebDriver
@@ -56,30 +57,25 @@ def daterange(start_date, end_date):
     for n in range(int((end_date - start_date).days)):
         yield start_date + timedelta(n)
 
-def crawl_data(start_date, end_date):
-    crawl_list = []
+def crawl_data(start_date, end_date, output_file):
+    all_data = []
     for single_date in daterange(start_date, end_date):
         date_str = single_date.strftime('%d/%m/%Y')
         print(f"Getting data for date {date_str}")
         df_crawl = get_exchange_rate_by_day(date_str)
-        if df_crawl is not None:
-            crawl_list.append(df_crawl)
+        if df_crawl is not None and not df_crawl.empty:
+            all_data.append(df_crawl)
+            # Save the accumulated data to the file, overwriting the previous content
+            df_combined = pd.concat(all_data, ignore_index=True)
+            df_combined.to_csv(output_file, index=False, header=True)
         sleep(1)
-    if crawl_list:
-        df = pd.concat(crawl_list, ignore_index=True)
-        return df
-    else:
-        return None
 
 def main():
-    start_date = date(2015, 5, 1)
-    end_date = date(2015, 9, 1)
+    start_date = date(2012, 7, 23)
+    end_date = date(2013, 1, 1)
+    output_file = '../crawl/data/vcb/2012/vcb_rates_2012_7.csv'
 
-    df_vnd = crawl_data(start_date, end_date)
-    if df_vnd is not None:
-        df_vnd.to_csv('../crawl/data/vcb/2015/vcb_rates_2015_2.csv', index=False, header=True)
-    else:
-        print("Exchange rates not found for the given date range")
+    crawl_data(start_date, end_date, output_file)
 
 if __name__ == "__main__":
     main()
