@@ -13,7 +13,7 @@ pip install -r requirements.txt
 
 **Error**
 1. Data crawling:
-- 22/12/2019 - Not having data on vietcombank website - Drop:
+- Not having data on vietcombank website - Drop:
     + 2019: 22/12
     + 2016: 18/7
     + 2015: 20,21/; 28/9
