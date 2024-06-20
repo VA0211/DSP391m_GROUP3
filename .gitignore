@@ -1,3 +1,5 @@
 venv
 crawl/data
 crawl/chromedriver.exe
+iTransformer/checkpoints
+iTransformer/results
