@@ -190,8 +190,8 @@ class Dataset_ETT_minute(Dataset):
 
 class Dataset_Custom(Dataset):
     def __init__(self, root_path = "C:/Users/Admin/Desktop/DSP/", flag='train', size=None,
-                 features='M', data_path='df_combine.csv',
-                 target='Sell', scale=True, timeenc=0, freq='h'):
+                 features='S', data_path='df_combine.csv',
+                 target='Sell', scale=True, timeenc=1, freq='d'):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -208,7 +208,7 @@ class Dataset_Custom(Dataset):
         self.set_type = type_map[flag]
 
         self.features = features
-        self.target = 'Sell'
+        self.target = "Sell"
         self.scale = scale
         self.timeenc = timeenc
         self.freq = freq
@@ -226,6 +226,8 @@ class Dataset_Custom(Dataset):
         df_raw.columns: ['date', ...(other features), target feature]
         '''
         cols = list(df_raw.columns)
+        print(cols)
+        print(self.target)
         cols.remove(self.target)
         cols.remove('Date')
         df_raw = df_raw[['Date'] + cols + [self.target]]
@@ -264,6 +266,7 @@ class Dataset_Custom(Dataset):
         self.data_x = data[border1:border2]
         self.data_y = data[border1:border2]
         self.data_stamp = data_stamp
+        print(data)
 
     def __getitem__(self, index):
         s_begin = index

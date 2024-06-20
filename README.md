@@ -20,3 +20,6 @@ pip install -r requirements.txt
     + 2013: 22/4; 6/12
     + 2012: 10,17,24/6; 1,8,15,22/7
 - Some old date (<=2020) have the wrong value: 11/10/2019, 29/11/2018, 5/7/2018, 24-25/4/2018 (They all have the value of 25.459k on Sell column) - Done fixing
+
+**Model**
+- [Official implementation for "iTransformer](https://github.com/thuml/iTransformer/tree/main): Inverted Transformers Are Effective for Time Series Forecasting" (ICLR 2024 Spotlight), https://openreview.net/forum?id=JePfAI8fah
