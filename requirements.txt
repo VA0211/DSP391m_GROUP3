@@ -10,3 +10,6 @@ beautifulsoup4
 tensorflow
 selenium
 statsmodels
+scikit-learn
+torch==2.0.0
+reformer-pytorch==1.4.4
