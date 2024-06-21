@@ -80,6 +80,11 @@ class Exp_Long_Term_Forecast(Exp_Basic):
         return total_loss
 
     def train(self, setting):
+        loss_lst_tr = []
+        loss_lst_val = []
+        folder_path = './results/' + setting + '/'
+        if not os.path.exists(folder_path):
+            os.makedirs(folder_path)
         train_data, train_loader = self._get_data(flag='train')
         vali_data, vali_loader = self._get_data(flag='val')
         test_data, test_loader = self._get_data(flag='test')
@@ -177,6 +182,12 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             adjust_learning_rate(model_optim, epoch + 1, self.args)
 
             # get_cka(self.args, setting, self.model, train_loader, self.device, epoch)
+
+        loss_lst_tr = np.array(loss_lst_tr)
+        loss_lst_val = np.array(loss_lst_val)
+        
+        np.save(folder_path + 'train_loss.npy', loss_lst_tr)
+        np.save(folder_path + 'val_loss.npy', loss_lst_val)
 
         best_model_path = path + '/' + 'checkpoint.pth'
         self.model.load_state_dict(torch.load(best_model_path))
