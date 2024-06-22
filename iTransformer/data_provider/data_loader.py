@@ -95,7 +95,7 @@ class Dataset_Custom(Dataset):
         self.data_y = data[border1:border2]
         self.data_stamp = data_stamp
         
-        print("Inverse_transform Data", self.inverse_transform(self.data_y))
+        # print("Inverse_transform Data", self.inverse_transform(self.data_y))
 
     def __getitem__(self, index):
         s_begin = index
@@ -117,9 +117,9 @@ class Dataset_Custom(Dataset):
         return self.scaler.inverse_transform(data)
     
 class Dataset_Pred(Dataset):
-    def __init__(self, root_path = "D:/FPT/SU24/DSP391m/code/crawl/data/clean/", flag='pred', 
-                 size=None, features='S', data_path='df_combine.csv',
-                 target='Sell', scale=True, inverse=False, timeenc=0, freq='15min', cols=None):
+    def __init__(self, root_path, flag='pred', size=None,
+                 features='MS', data_path='D:/FPT/SU24/DSP391m/try/iTransformer/data/real/df_combine.csv',
+                 target='Sell', scale=True, inverse=True, timeenc=0, freq='d', cols=None):
         # size [seq_len, label_len, pred_len]
         # info
         if size == None:
@@ -174,20 +174,18 @@ class Dataset_Pred(Dataset):
         else:
             data = df_data.values
 
-        print(df_raw)
         tmp_stamp = df_raw[['Date']][border1:border2]
-        
-        tmp_stamp['Date'] = pd.to_datetime(tmp_stamp.date)
-        pred_dates = pd.date_range(tmp_stamp.date.values[-1], periods=self.pred_len + 1, freq=self.freq)
+        tmp_stamp['Date'] = pd.to_datetime(tmp_stamp.Date)
+        pred_dates = pd.date_range(tmp_stamp.Date.values[-1], periods=self.pred_len + 1, freq=self.freq)
 
         df_stamp = pd.DataFrame(columns=['Date'])
-        df_stamp.date = list(tmp_stamp.date.values) + list(pred_dates[1:])
+        df_stamp.Date = list(tmp_stamp.Date.values) + list(pred_dates[1:])
         if self.timeenc == 0:
-            df_stamp['month'] = df_stamp.date.apply(lambda row: row.month, 1)
-            df_stamp['day'] = df_stamp.date.apply(lambda row: row.day, 1)
-            df_stamp['weekday'] = df_stamp.date.apply(lambda row: row.weekday(), 1)
-            df_stamp['hour'] = df_stamp.date.apply(lambda row: row.hour, 1)
-            df_stamp['minute'] = df_stamp.date.apply(lambda row: row.minute, 1)
+            df_stamp['month'] = df_stamp.Date.apply(lambda row: row.month, 1)
+            df_stamp['day'] = df_stamp.Date.apply(lambda row: row.day, 1)
+            df_stamp['weekday'] = df_stamp.Date.apply(lambda row: row.weekday(), 1)
+            df_stamp['hour'] = df_stamp.Date.apply(lambda row: row.hour, 1)
+            df_stamp['minute'] = df_stamp.Date.apply(lambda row: row.minute, 1)
             df_stamp['minute'] = df_stamp.minute.map(lambda x: x // 15)
             data_stamp = df_stamp.drop(['Date'], 1).values
         elif self.timeenc == 1:
@@ -195,6 +193,8 @@ class Dataset_Pred(Dataset):
             data_stamp = data_stamp.transpose(1, 0)
 
         self.data_x = data[border1:border2]
+        print('Start index in raw df:', border1)
+        print('End index in raw df:', border2)
         if self.inverse:
             self.data_y = df_data.values[border1:border2]
         else:

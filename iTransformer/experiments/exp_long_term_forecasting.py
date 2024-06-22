@@ -324,9 +324,12 @@ class Exp_Long_Term_Forecast(Exp_Basic):
                     else:
                         outputs = self.model(batch_x, batch_x_mark, dec_inp, batch_y_mark)
                 outputs = outputs.detach().cpu().numpy()
-                if pred_data.scale and self.args.inverse:
-                    shape = outputs.shape
-                    outputs = pred_data.inverse_transform(outputs.squeeze(0)).reshape(shape)
+                # if pred_data.scale and self.args.inverse:
+                #     shape = outputs.shape
+                #     outputs = pred_data.inverse_transform(outputs.squeeze(0)).reshape(shape)
+                shape = outputs.shape
+                outputs = pred_data.inverse_transform(outputs.squeeze(0)).reshape(shape)
+                print(outputs)
                 preds.append(outputs)
 
         preds = np.array(preds)
