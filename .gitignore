@@ -1,9 +1,12 @@
 venv
 crawl/data
 crawl/chromedriver.exe
+
 iTransformer/checkpoints
 iTransformer/results/*
 iTransformer/test_results
+iTransformer/testing.ipynb
+iTransformer/training.ipynb
 
 iTransformer/layers/__pycache__
 iTransformer/model/__pycache__
