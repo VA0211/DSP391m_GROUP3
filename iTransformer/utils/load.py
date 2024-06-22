@@ -6,7 +6,7 @@ def parse_bash_script(script_content):
     # Define the named tuple for arguments
     Args = namedtuple('Args', [
         'is_training', 'root_path', 'data_path', 'model_id', 'model', 'data', 'features',
-        'target', 'freq', 'seq_len', 'pred_len', 'e_layers', 'enc_in', 'dec_in', 'c_out',
+        'target', 'freq', 'seq_len', 'label_len', 'pred_len', 'e_layers', 'enc_in', 'dec_in', 'c_out',
         'des', 'd_model', 'd_ff', 'itr', 'target_root_path', 'target_data_path',
         'lradj', 'learning_rate', 'patience', 'moving_avg', 'dropout', 'train_epochs', 'batch_size', 
         # 'do_predict'
@@ -31,6 +31,7 @@ def parse_bash_script(script_content):
         target=args_dict.get('target', ''),
         freq=args_dict.get('freq', ''),
         seq_len=int(args_dict.get('seq_len', 0)),
+        label_len=int(args_dict.get('label_len', 0)),
         pred_len=int(args_dict.get('pred_len', 0)),
         e_layers=int(args_dict.get('e_layers', 0)),
         enc_in=int(args_dict.get('enc_in', 0)),
