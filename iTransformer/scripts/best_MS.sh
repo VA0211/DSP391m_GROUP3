@@ -4,9 +4,9 @@ model_name=iTransformer
 
 python -u run.py \
   --is_training 1 \
-  --root_path D:/FPT/SU24/DSP391m/try/iTransformer/data/real/ \
+  --root_path D:/FPT/SU24/DSP391m/code/data/ \
   --data_path df_combine.csv \
-  --model_id custom_model \
+  --model_id forex_M \
   --model iTransformer \
   --data custom \
   --features MS \
@@ -22,7 +22,7 @@ python -u run.py \
   --d_model 512 \
   --d_ff 512 \
   --itr 1 \
-  --target_root_path D:/FPT/SU24/DSP391m/try/iTransformer/data/real/ \
+  --target_root_path D:/FPT/SU24/DSP391m/code/data/ \
   --target_data_path df_combine.csv \
   --lradj type1 \
   --learning_rate 0.0001 \
