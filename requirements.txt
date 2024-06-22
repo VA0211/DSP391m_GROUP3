@@ -12,4 +12,5 @@ selenium
 statsmodels
 scikit-learn
 torch==2.0.0
+torchviz
 reformer-pytorch==1.4.4
