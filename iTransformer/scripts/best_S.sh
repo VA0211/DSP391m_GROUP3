@@ -12,8 +12,8 @@ python -u run.py \
   --features S \
   --target Sell \
   --freq d \
-  --seq_len 60 \
-  --pred_len 60 \
+  --seq_len 50 \
+  --pred_len 50 \
   --e_layers 1 \
   --enc_in 9 \
   --dec_in 9 \
