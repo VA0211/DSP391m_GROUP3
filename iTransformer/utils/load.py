@@ -57,7 +57,7 @@ def parse_bash_script(script_content):
 
     return args_namespace
 
-def default_config():
+def get_default_config():
     parser = argparse.ArgumentParser(description='iTransformer')
 
     # basic config

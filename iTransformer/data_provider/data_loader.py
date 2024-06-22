@@ -60,10 +60,10 @@ class Dataset_Custom(Dataset):
         border1 = border1s[self.set_type]
         border2 = border2s[self.set_type]
 
-        print('border1s: ', border1s)
-        print('border1: ', border1)
-        print('border2s: ', border2s)
-        print('border2: ', border2)
+        # print('border1s: ', border1s)
+        # print('border1: ', border1)
+        # print('border2s: ', border2s)
+        # print('border2: ', border2)
 
         if self.features == 'M' or self.features == 'MS':
             cols_data = df_raw.columns[1:]
